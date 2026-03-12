@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════
+   suggestion-style.css  –  Kachara-vibhajanam
+   ═══════════════════════════════════════════ */
+
+.suggestion-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.suggestion-header {
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: 20px;
+}
+
+.suggestion-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+
+.suggestion-header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.waste-type-badge {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 16px 0 24px 0;
+  text-transform: capitalize;
+}
+
+.disposal-section {
+  background: linear-gradient(135deg, rgba(42, 168, 125, 0.05) 0%, rgba(74, 140, 92, 0.05) 100%);
+  border: 1px solid rgba(74, 140, 92, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.disposal-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--forest);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disposal-section p {
+  line-height: 1.8;
+  color: var(--dark);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+.disposal-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.disposal-section li {
+  padding: 10px 0;
+  padding-left: 28px;
+  position: relative;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+.disposal-section li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--leaf);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.tips-box {
+  background: linear-gradient(135deg, rgb(248, 250, 248) 0%, rgb(240, 248, 244) 100%);
+  border-left: 4px solid var(--leaf);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+.tips-box h4 {
+  color: var(--forest);
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tips-box p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(42, 168, 125, 0.1);
+  color: var(--leaf);
+  border: 1px solid rgba(42, 168, 125, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: rgba(42, 168, 125, 0.2);
+  border-color: rgba(42, 168, 125, 0.5);
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 24px 0;
+}
+
+.all-types-link {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.all-types-link a {
+  color: var(--leaf);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.all-types-link a:hover {
+  text-decoration: underline;
+}

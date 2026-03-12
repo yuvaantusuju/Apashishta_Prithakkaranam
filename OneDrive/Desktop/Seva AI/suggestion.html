@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disposal Suggestions — Kachara-vibhajanam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="dashboard-style.css"/>
+  <style>
+    :root {
+      --forest: #1a3a2a;
+      --moss:   #2d5a3d;
+      --leaf:   #4a8c5c;
+      --sprout: #7ec89a;
+      --cream:  #f5f0e8;
+      --muted:  #5a7a65;
+    }
+
+    .sug-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 28px 24px 48px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      background: rgba(74,140,92,0.1);
+      color: var(--leaf);
+      border: 1px solid rgba(74,140,92,0.3);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 28px;
+    }
+    .back-btn:hover { background: rgba(74,140,92,0.2); }
+
+    .sug-hero { text-align: center; margin-bottom: 36px; }
+    .sug-hero h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 10px;
+    }
+    .sug-hero p { color: var(--muted); font-size: 0.92rem; }
+
+    .waste-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      margin: 12px 0 20px;
+      text-transform: capitalize;
+    }
+    .waste-badge .badge-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.7;
+    }
+
+    .ai-powered-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      opacity: 0.75;
+      margin: 6px 0 28px;
+      letter-spacing: 0.05em;
+    }
+    .ai-powered-bar span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sprout);
+    }
+
+    /* Loading */
+    .sug-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 64px 20px;
+      text-align: center;
+    }
+    .sug-loading .spin-ring {
+      width: 48px; height: 48px;
+      border: 3px solid rgba(74,140,92,0.2);
+      border-top-color: var(--leaf);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .sug-loading p { color: var(--muted); font-size: 0.92rem; }
+    .ai-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px;
+      background: rgba(74,140,92,0.1);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--leaf);
+      letter-spacing: 0.05em;
+    }
+
+    /* AI Sections */
+    .ai-section {
+      background: linear-gradient(135deg, rgba(232,245,237,0.5) 0%, rgba(216,240,226,0.35) 100%);
+      border: 1px solid rgba(74,140,92,0.15);
+      border-radius: 16px;
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.45s ease both;
+    }
+    .ai-section:nth-child(1) { animation-delay: 0.05s; }
+    .ai-section:nth-child(2) { animation-delay: 0.12s; }
+    .ai-section:nth-child(3) { animation-delay: 0.19s; }
+    .ai-section:nth-child(4) { animation-delay: 0.26s; }
+    .ai-section:nth-child(5) { animation-delay: 0.33s; }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .ai-section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 14px;
+    }
+    .icon-wrap {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: rgba(74,140,92,0.15);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .ai-section p { font-size: 0.92rem; line-height: 1.8; color: #2a3d2e; }
+
+    /* Tips list */
+    .tips-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .tips-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; line-height: 1.65; color: #2a3d2e; }
+    .tip-check {
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px;
+      background: var(--leaf);
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+    .tip-check svg { color: #fff; }
+
+    /* Env card */
+    .env-card {
+      background: linear-gradient(135deg, var(--forest) 0%, var(--moss) 100%);
+      border-radius: 16px;
+      padding: 26px 28px;
+      color: #fff;
+      margin-bottom: 20px;
+      animation: fadeUp 0.45s ease 0.3s both;
+    }
+    .env-card-title { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; opacity: 0.9; }
+    .env-card p { font-size: 0.9rem; line-height: 1.75; opacity: 0.85; }
+
+    /* Error */
+    .sug-error { background:#fff0f0; border:1px solid #f5c6c6; border-radius:12px; padding:28px; text-align:center; color:#b00; }
+    .sug-error a { color: var(--leaf); }
+
+    .retry-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin-top: 16px; padding: 10px 20px;
+      background: var(--leaf); color: #fff;
+      border: none; border-radius: 9px;
+      font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .retry-btn:hover { background: var(--forest); }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo-wrap"><img src="logo.png" alt="logo" class="sidebar-logo"/></div>
+      <span class="sidebar-brand">Kachara-<br/>vibhajanam</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" href="dashboard.html" data-page="home">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <span class="nav-label">Home</span>
+      </a>
+      <a class="nav-item" href="dashboard.html" data-page="scan">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h5v5H3zM16 3h5v5h-5zM3 16h5v5H3z"/><path d="M21 16h-3v3m0 2h3m-6 0h3m-3-3v-3h3"/></svg></span>
+        <span class="nav-label">Scan</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="eco-badge">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M17 8C8 10 5.9 16.17 3.82 19.34 3.09 20.5 4 22 5.33 21.67A10 10 0 0 0 21 12C21 12 20 8 17 8Z"/></svg>
+        Segregate · Sustain
+      </div>
+    </div>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout" id="layout">
+    <header class="topbar">
+      <button class="toggle-btn" id="toggleBtn" aria-label="Toggle sidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-title">Disposal Suggestion</div>
+      <div class="topbar-right">
+        <div class="topbar-avatar">KV</div>
+      </div>
+    </header>
+
+    <section class="page active" style="padding:0;">
+      <div class="sug-container">
+
+        <a href="dashboard.html" class="back-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Scanner
+        </a>
+
+        <div class="sug-hero">
+          <h2 id="sugTitle">Disposal Suggestion</h2>
+          <div id="wasteTypeBadge"></div>
+          <div class="ai-powered-bar">
+            <span></span> AI-powered suggestion by Claude <span></span>
+          </div>
+        </div>
+
+        <div id="suggestionContent"></div>
+
+      </div>
+    </section>
+  </div>
+
+  <script>
+  /* ── BADGE COLOURS ── */
+  const BADGE = {
+    plastic:{bg:"#e3f2fd",color:"#1565c0"},Plastic:{bg:"#e3f2fd",color:"#1565c0"},
+    metal:{bg:"#fff3e0",color:"#c17000"},Metal:{bg:"#fff3e0",color:"#c17000"},
+    cardboard:{bg:"#fce4ec",color:"#c62828"},Cardboard:{bg:"#fce4ec",color:"#c62828"},
+    paper:{bg:"#f3e5f5",color:"#6a1b9a"},Paper:{bg:"#f3e5f5",color:"#6a1b9a"},
+    ogranic:{bg:"#e8f5e9",color:"#2e7d32"},Ogranic:{bg:"#e8f5e9",color:"#2e7d32"},
+    organic:{bg:"#e8f5e9",color:"#2e7d32"},Organic:{bg:"#e8f5e9",color:"#2e7d32"},
+    glass:{bg:"#e0f7fa",color:"#00695c"},Glass:{bg:"#e0f7fa",color:"#00695c"},
+  };
+
+  /* ── SIDEBAR ── */
+  const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay');
+  let sidebarOpen=true;
+  function isMobile(){return window.innerWidth<=768;}
+  document.getElementById('toggleBtn').addEventListener('click',()=>{
+    if(isMobile()){sidebar.classList.toggle('open');overlay.classList.toggle('show');}
+    else{sidebarOpen=!sidebarOpen;sidebar.classList.toggle('collapsed',!sidebarOpen);document.getElementById('layout').classList.toggle('expanded',!sidebarOpen);}
+  });
+  overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show');});
+
+  /* ── SHOW LOADING ── */
+  function showLoading(wt) {
+    document.getElementById('suggestionContent').innerHTML = `
+      <div class="sug-loading">
+        <div class="ai-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          AI Analysis
+        </div>
+        <div class="spin-ring"></div>
+        <p>Generating personalised suggestions for <strong>${wt}</strong> waste…</p>
+      </div>`;
+  }
+
+  /* ── SHOW ERROR ── */
+  function showError(msg) {
+    document.getElementById('suggestionContent').innerHTML = `
+      <div class="sug-error">
+        <strong>⚠️ Could not load suggestions</strong>
+        <p style="margin:10px 0 0;font-size:0.88rem;">${msg}</p>
+        <button class="retry-btn" onclick="loadSuggestion()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Try Again
+        </button>
+        <br/><a href="dashboard.html" style="font-size:0.82rem;margin-top:12px;display:inline-block;">← Back to Scanner</a>
+      </div>`;
+  }
+
+  /* ── RENDER AI RESULT ── */
+  function renderAI(parsed, wasteType) {
+    document.getElementById('sugTitle').textContent = parsed.title || (wasteType + " — Disposal Guide");
+
+    const tipsHtml = (parsed.tips || []).map(t => `
+      <li>
+        <span class="tip-check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        ${t}
+      </li>`).join('');
+
+    document.getElementById('suggestionContent').innerHTML = `
+      <div class="ai-section">
+        <div class="ai-section-title">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          How to Dispose
+        </div>
+        <p>${parsed.disposal || "Follow your local waste management guidelines."}</p>
+      </div>
+
+      <div class="ai-section">
+        <div class="ai-section-title">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          What counts as ${wasteType.toLowerCase()} waste?
+        </div>
+        <p>${parsed.what || ""}</p>
+      </div>
+
+      <div class="ai-section">
+        <div class="ai-section-title">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          Practical Tips
+        </div>
+        <ul class="tips-list">${tipsHtml}</ul>
+      </div>
+
+      <div class="env-card">
+        <div class="env-card-title">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17 8C8 10 5.9 16.17 3.82 19.34 3.09 20.5 4 22 5.33 21.67A10 10 0 0 0 21 12C21 12 20 8 17 8Z"/></svg>
+          🌍 Environmental Impact
+        </div>
+        <p>${parsed.environmental || ""}</p>
+      </div>
+
+      ${parsed.alternatives ? `
+      <div class="ai-section">
+        <div class="ai-section-title">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+          Eco-Friendly Alternatives
+        </div>
+        <p>${parsed.alternatives}</p>
+      </div>` : ''}
+
+      <div style="text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid rgba(74,140,92,0.15);">
+        <a href="dashboard.html" class="back-btn" style="margin:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+          Scan Another Item
+        </a>
+      </div>`;
+  }
+
+  /* ── CLAUDE API ── */
+  async function fetchAISuggestion(wasteType) {
+    const prompt = `You are a friendly waste management and sustainability expert helping users in India properly dispose of waste.
+The user scanned a waste item and the AI detected it as: "${wasteType}".
+
+Respond ONLY with a valid JSON object (no markdown, no code fences, no preamble). Use these exact keys:
+{
+  "title": "Short descriptive title e.g. 'Paper Waste — Disposal Guide'",
+  "disposal": "2-3 sentences: clear step-by-step on how to correctly dispose of this waste",
+  "what": "1-2 sentences describing common items that fall into this waste category",
+  "tips": ["actionable tip 1", "actionable tip 2", "actionable tip 3", "actionable tip 4", "actionable tip 5"],
+  "environmental": "2 sentences about why proper disposal of this waste matters environmentally",
+  "alternatives": "1-2 sentences on eco-friendly alternatives or reuse/upcycle ideas (leave empty string if none)"
+}`;
+
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    if (!res.ok) throw new Error("API returned " + res.status);
+    const data = await res.json();
+    const raw = (data.content || []).map(b => b.text || "").join("").trim();
+    const clean = raw.replace(/^```[a-z]*\n?/i,"").replace(/```$/i,"").trim();
+    return JSON.parse(clean);
+  }
+
+  /* ── MAIN ── */
+  async function loadSuggestion() {
+    const params = new URLSearchParams(window.location.search);
+    const wasteType = params.get('type') || sessionStorage.getItem('lastWasteType');
+
+    if (!wasteType) {
+      document.getElementById('suggestionContent').innerHTML = `
+        <div class="sug-error">
+          <strong>No waste type detected.</strong><br/>
+          <a href="dashboard.html">← Go back and scan an item first.</a>
+        </div>`;
+      return;
+    }
+
+    // Badge
+    const col = BADGE[wasteType] || { bg:"#e8f5e9", color:"#2e7d32" };
+    document.getElementById('wasteTypeBadge').innerHTML = `
+      <div class="waste-badge" style="background:${col.bg};color:${col.color};">
+        <span class="badge-dot"></span>
+        ${wasteType.charAt(0).toUpperCase() + wasteType.slice(1)}
+      </div>`;
+
+    showLoading(wasteType);
+
+    try {
+      const parsed = await fetchAISuggestion(wasteType);
+      renderAI(parsed, wasteType);
+    } catch(err) {
+      console.error("AI suggestion error:", err);
+      showError("Could not reach the AI. Please check your connection and try again.");
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', loadSuggestion);
+  </script>
+</body>
+</html>
