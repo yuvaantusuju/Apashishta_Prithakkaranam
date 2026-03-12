@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   suggestion-script.js  –  Kachara-vibhajanam
+   suggestion-script.js  –  Apashishta Prithakkaranam
    ═══════════════════════════════════════════════════════ */
 
 const DISPOSAL_DETAILS = {

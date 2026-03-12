@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════
-   dashboard-script.js  –  Kachara-vibhajanam
+   dashboard-script.js  –  Apashishta Prithakkaranam
    ══════════════════════════════════════════════ */
 
 /* Labels from model metadata: ["plastic","Metal","paper","cardboard","glass","ogranic"]
